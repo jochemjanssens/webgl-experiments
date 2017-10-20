@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>1op1</title>
+</head>
+<style>
+  .bal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-right: -10px;
+    background: red;
+    border-radius: 50% 50%;
+    transition: top .1s, left .1s;
+  }
+</style>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+  <script type="text/javascript">
+    let socket, targetId;
+
+    const init = () => {
+      targetId = getUrlParameter('id');
+      if (!targetId) {
+        alert('missing target id in querystring');
+        return;
+      }
+      socket = io.connect('/');
+
+      window.addEventListener('deviceorientation', e => {
+        socket.emit('update', targetId, {
+          x: e.alpha,
+          y: e.beta
+        });
+      });
+    }
+
+    const getUrlParameter = name => {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      const results = regex.exec(location.search);
+      return results === null ? false : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+
+    init();
+  </script>
+</body>
