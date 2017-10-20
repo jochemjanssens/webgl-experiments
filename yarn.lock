@@ -221,12 +221,6 @@ inert@^4.2.1:
     joi "10.x.x"
     lru-cache "4.1.x"
 
-insert@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/insert/-/insert-1.0.1.tgz#36fe0cebdefa38b5f65a9bb87d093c0a000c9a89"
-  dependencies:
-    to-array "~0.1.3"
-
 iron@4.x.x, iron@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/iron/-/iron-4.0.5.tgz#4f042cceb8b9738f346b59aa734c83a89bc31428"
@@ -355,6 +349,10 @@ punycode@2.x.x:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
 
+qrcode-generator@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/qrcode-generator/-/qrcode-generator-1.3.1.tgz#eedcbe967ceba5585f0f4b8d9d7916961a335369"
+
 safe-buffer@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
@@ -429,7 +427,7 @@ subtext@^5.0.0:
     pez "2.x.x"
     wreck "12.x.x"
 
-to-array@0.1.4, to-array@~0.1.3:
+to-array@0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/to-array/-/to-array-0.1.4.tgz#17e6c11f73dd4f3d74cda7a4ff3238e9ad9bf890"
 

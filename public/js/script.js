@@ -1,6 +1,8 @@
 const connectionUrlEl = document.getElementById('connectionUrl');
 let socket;
 
+let yPos = 0;
+
 const init = () => {
   //THREE JS
   createScene();
@@ -12,18 +14,43 @@ const init = () => {
   socket = io.connect('/');
   socket.on('connect', () => {
     connectionUrlEl.textContent = socket.id;
+    //QR
+    createQRcode(socket.id);
   });
   socket.on('update', data => {
-    console.log(data);
+    console.log(data.y);
+    //van 10-90 naar 0.001 - 0.01
+    const max = 90;
+    const min = 10;
+    if(data.y > max){
+      yPos = max;
+    }
+    if(data.y < min){
+      yPos = min;
+    }
+
+    yPos = ((data.y - min) / (max-min))/100;
+    console.log(yPos);
   });
+
+
+}
+
+const createQRcode = id =>{
+  var typeNumber = 4;
+  var errorCorrectionLevel = 'L';
+  var qr = qrcode(typeNumber, errorCorrectionLevel);
+  qr.addData(`192.168.0.233:8080/controller.html?id=${id}`);
+  qr.make();
+  document.getElementById('qrcode').innerHTML = qr.createImgTag();
 }
 
 const loop = () => {
   renderer.render(scene, camera);
 
-  circle.mesh.rotation.z += .003;
-  circle.mesh.rotation.y += .003;
-  circle.mesh.rotation.x += .003;
+  //circle.mesh.rotation.z += .003;
+  circle.mesh.rotation.y += yPos;
+  //circle.mesh.rotation.x += .003;
 
   requestAnimationFrame(loop);
 }

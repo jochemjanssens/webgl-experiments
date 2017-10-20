@@ -31,8 +31,8 @@
 
       window.addEventListener('deviceorientation', e => {
         socket.emit('update', targetId, {
-          x: e.alpha,
-          y: e.beta
+          x: e.beta,
+          y: e.alpha
         });
       });
     }
