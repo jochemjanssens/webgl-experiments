@@ -14,26 +14,26 @@ const init = () => {
   socket = io.connect('/');
   socket.on('connect', () => {
     connectionUrlEl.textContent = socket.id;
-    //QR
     createQRcode(socket.id);
   });
   socket.on('update', data => {
     console.log(data.y);
-    //van 10-90 naar 0.001 - 0.01
     const max = 90;
     const min = 10;
-    if(data.y > max){
-      yPos = max;
-    }
-    if(data.y < min){
-      yPos = min;
-    }
-
-    yPos = ((data.y - min) / (max-min))/100;
+    yPos = normalizeData(data.y, max, min);
     console.log(yPos);
   });
+}
 
-
+const normalizeData = (value, max, min) => {
+  let newValue;
+  if(value > max){
+    return max;
+  }
+  if(data.y < min){
+    return min;
+  }
+  return ((data.y - min) / (max-min))/100;
 }
 
 const createQRcode = id =>{
