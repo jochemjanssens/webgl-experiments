@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Experiment</title>
+  <meta name="author" content="Jochem Janssens">
+  <meta name="description" content=" web-experiment met WebGL (Three.js) en javascript-socketing (socket.io)">
+  <meta name="keywords" content="Jochem Janssens, Jochem, Janssens, Devine, WebGL, socket">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,6 +17,9 @@
       Scan de QR code, leg hierna je GSM plat voor je, en probeer dan deze rond zijn assen te roteren en bekijk welk effect dit heeft op de vorm.
     </p>
     <div id="qrcode"></div>
+    <p class="qr-text">
+      scan de code om verder te gaan
+    </p>
   </article>
   <div id="world"></div>
 
@@ -21,4 +27,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
   <script type="text/javascript" src="js/qrcode.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
+  <script>
+    WebFontConfig = {
+      custom: {
+        families: ['Branding'],
+        urls: ['assets/fonts/branding.css']
+      }
+    };
+
+    (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.async = true;
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+    })(document);
+  </script>
 </body>

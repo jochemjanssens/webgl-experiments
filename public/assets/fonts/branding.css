@@ -1,0 +1,27 @@
+@font-face {
+  font-family: Branding;
+  src: url(Branding-BlackItalic.woff2) format('woff2'), url(Branding-BlackItalic.woff) format('woff');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Branding;
+  src: url(Branding-SemiboldItalic.woff2) format('woff2'), url(Branding-SemiboldItalic.woff) format('woff');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Branding;
+  src: url(Branding-Semilight.woff2) format('woff2'), url(Branding-Semilight.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Branding;
+  src: url(Branding-MediumItalic.woff2) format('woff2'), url(Branding-MediumItalic.woff) format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
