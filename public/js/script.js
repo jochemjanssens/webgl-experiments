@@ -20,21 +20,28 @@ const init = () => {
     if(explainer.style.display != "none"){
       explainer.style.display = "none";
     }
-    const xMax = 90;
-    const xMin = 0;
-    xPos = normalizeData(data.x, xMax, xMin);
+    xPos = normalizeData(data.x, 120, 0);
+
+    //draai gaat van 270 -> 0 -> 70
+    let fixValue;
+    if(data.y>290){
+      fixValue = data.y - 290;
+    }else{
+      fixValue = data.y + 70;
+    }
+   yPos = normalizeData(fixValue, 140, 0);
   });
 }
 
 const normalizeData = (value, max, min) => {
   let newValue;
   if(value > max){
-    return (max-min)/100;
+    return (max-min)/8000;
   }
   if(value < min){
     return min;
   }
-  return ((value - min) / (max-min))/100;
+  return ((value - min) / (max-min))/80;
 }
 
 const createQRcode = id =>{
@@ -49,6 +56,7 @@ const createQRcode = id =>{
 const loop = () => {
   renderer.render(scene, camera);
   circle.mesh.rotation.x += xPos;
+  circle.mesh.rotation.y += yPos;
 
   requestAnimationFrame(loop);
 }
