@@ -16,6 +16,10 @@ const init = () => {
     createQRcode(socket.id);
   });
   socket.on('update', data => {
+    const explainer = document.querySelector('.explainer')
+    if(explainer.style.display != "none"){
+      explainer.style.display = "none";
+    }
     const xMax = 90;
     const xMin = 0;
     xPos = normalizeData(data.x, xMax, xMin);

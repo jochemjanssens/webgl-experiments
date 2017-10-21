@@ -10,3 +10,34 @@
 	overflow: hidden;
 	background: radial-gradient(#333, #222);
 }
+
+.explainer {
+	position: fixed;
+	width: 75%;
+	height: 75%;
+	background-color: rgba(255,255,255,0.8);
+	z-index: 2;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 2rem;
+	left: 12.5%;
+	top: 12.5%;
+	padding: 2rem;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.explainer-title {
+	font-weight: bold;
+	margin-bottom: 2rem;
+}
+
+#qrcode {
+	margin: 1rem;
+}
+
+#qrcode img{
+	width: 20rem;
+	height: 20rem;
+}
