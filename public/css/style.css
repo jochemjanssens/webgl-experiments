@@ -10,9 +10,3 @@
 	overflow: hidden;
 	background: radial-gradient(#333, #222);
 }
-
-.controls {
-	position: fixed;
-	right: 0;
-	top: 0;
-}

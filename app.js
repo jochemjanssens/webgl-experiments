@@ -12,17 +12,8 @@ const io = require('socket.io')(server.listener);
 
 io.on('connection', socket => {
   console.log('connection');
-  users[socket.id] = {
-
-  };
   socket.on('update', (targetId, data) => {
-    if(!users[targetId]){
-      return;
-    }
     socket.to(targetId).emit('update', data);
-  });
-  socket.on('disconnect', () => {
-    delete users[socket.id];
   });
 });
 
