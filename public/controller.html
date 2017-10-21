@@ -17,6 +17,12 @@
   }
 </style>
 <body>
+  <h1>
+
+  </h1>
+  <h2>
+
+  </h2>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
   <script type="text/javascript">
     let socket, targetId;
@@ -29,11 +35,15 @@
       }
       socket = io.connect('/');
 
+      let previousX = 0;
       window.addEventListener('deviceorientation', e => {
-        socket.emit('update', targetId, {
-          x: e.beta,
-          y: e.alpha
-        });
+        const xValue = e.beta;
+        if(xValue > previousX + 3 || xValue < previousX - 3){
+          socket.emit('update', targetId, {
+            x: xValue
+          });
+          previousX = xValue;
+        }
       });
     }
 

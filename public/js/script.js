@@ -1,6 +1,6 @@
-const connectionUrlEl = document.getElementById('connectionUrl');
 let socket;
 
+let xPos = 0;
 let yPos = 0;
 
 const init = () => {
@@ -13,27 +13,24 @@ const init = () => {
   // socket
   socket = io.connect('/');
   socket.on('connect', () => {
-    connectionUrlEl.textContent = socket.id;
     createQRcode(socket.id);
   });
   socket.on('update', data => {
-    console.log(data.y);
-    const max = 90;
-    const min = 10;
-    yPos = normalizeData(data.y, max, min);
-    console.log(yPos);
+    const xMax = 90;
+    const xMin = 0;
+    xPos = normalizeData(data.x, xMax, xMin);
   });
 }
 
 const normalizeData = (value, max, min) => {
   let newValue;
   if(value > max){
-    return max;
+    return (max-min)/100;
   }
-  if(data.y < min){
+  if(value < min){
     return min;
   }
-  return ((data.y - min) / (max-min))/100;
+  return ((value - min) / (max-min))/100;
 }
 
 const createQRcode = id =>{
@@ -47,10 +44,7 @@ const createQRcode = id =>{
 
 const loop = () => {
   renderer.render(scene, camera);
-
-  //circle.mesh.rotation.z += .003;
-  circle.mesh.rotation.y += yPos;
-  //circle.mesh.rotation.x += .003;
+  circle.mesh.rotation.x += xPos;
 
   requestAnimationFrame(loop);
 }
