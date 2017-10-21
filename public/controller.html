@@ -27,16 +27,16 @@
       let previousY = 0;
       window.addEventListener('deviceorientation', e => {
         const xValue = e.beta;
-        const yValue = e.alpha;
-        if(xValue > previousX + 3 || xValue < previousX - 3 || yValue > previousY + 3 || yValue < previousY - 3){
-          socket.emit('update', targetId, {
-            x: xValue,
-            y: yValue
-          });
-          previousX = xValue;
-          previousY = yValue;
-        }
-      });
+        const yValue = e.gamma;
+        if(xValue > previousX + 3 || xValue < previousX - 3 || yValue > previousY + 5 || yValue < previousY - 5){
+            socket.emit('update', targetId, {
+              x: xValue,
+              y: yValue
+            });
+            previousX = xValue;
+            previousY = yValue;
+          }
+        });
     }
 
     const getUrlParameter = name => {

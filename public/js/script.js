@@ -20,28 +20,20 @@ const init = () => {
     if(explainer.style.display != "none"){
       explainer.style.display = "none";
     }
-    xPos = normalizeData(data.x, 120, 0);
 
-    //draai gaat van 270 -> 0 -> 70
-    let fixValue;
+    xPos = (data.x/50);
+    yPos = (data.y/50);
+
+    console.log(data.y);
+
+    /*let fixValue;
     if(data.y>290){
       fixValue = data.y - 290;
     }else{
       fixValue = data.y + 70;
     }
-   yPos = normalizeData(fixValue, 140, 0);
+    yPos = normalizeData(fixValue, 140, 0);*/
   });
-}
-
-const normalizeData = (value, max, min) => {
-  let newValue;
-  if(value > max){
-    return (max-min)/8000;
-  }
-  if(value < min){
-    return min;
-  }
-  return ((value - min) / (max-min))/80;
 }
 
 const createQRcode = id =>{
@@ -50,10 +42,10 @@ const createQRcode = id =>{
   var qr = qrcode(typeNumber, errorCorrectionLevel);
 
   //LOCAL
-  //qr.addData(`http://192.168.0.233:8080/controller.html?id=${id}`);
+  qr.addData(`http://192.168.0.233:8080/controller.html?id=${id}`);
 
   //ONLINE
-  qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
+  //qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
 
   qr.make();
   document.getElementById('qrcode').innerHTML = qr.createImgTag();
@@ -61,8 +53,8 @@ const createQRcode = id =>{
 
 const loop = () => {
   renderer.render(scene, camera);
-  circle.mesh.rotation.x += xPos;
-  circle.mesh.rotation.y += yPos;
+  circle.mesh.rotation.x = xPos;
+  circle.mesh.rotation.y = yPos;
 
   requestAnimationFrame(loop);
 }
