@@ -2,27 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>1op1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>controller</title>
+  <link rel="stylesheet" href="css/controller.css">
 </head>
-<style>
-  .bal {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    margin-left: -10px;
-    margin-right: -10px;
-    background: red;
-    border-radius: 50% 50%;
-    transition: top .1s, left .1s;
-  }
-</style>
 <body>
-  <h1>
-
-  </h1>
-  <h2>
-
-  </h2>
+  <h1 class="description-title">Experiment</h1>
+  <p class="description-text">
+    Leg je GSM plat voor je, en probeer dan deze rond zijn assen te roteren en bekijk welk effect dit heeft op de vorm.
+  </p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
   <script type="text/javascript">
     let socket, targetId;
@@ -55,5 +43,19 @@
     };
 
     init();
+
+    WebFontConfig = {
+      custom: {
+        families: ['Branding'],
+        urls: ['assets/fonts/branding.css']
+      }
+    };
+
+    (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.async = true;
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+    })(document);
   </script>
 </body>
