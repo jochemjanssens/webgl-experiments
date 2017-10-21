@@ -45,7 +45,7 @@ const normalizeData = (value, max, min) => {
 }
 
 const createQRcode = id =>{
-  var typeNumber = 4;
+  var typeNumber = 6;
   var errorCorrectionLevel = 'L';
   var qr = qrcode(typeNumber, errorCorrectionLevel);
 
