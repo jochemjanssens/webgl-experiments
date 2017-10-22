@@ -25,15 +25,14 @@ const init = () => {
     }
 
     if(data.x > previousX + 2 || data.x < previousX - 2){
-      //Omzetten dan radialen
+      //Omzetten dan radialen (0-360)
       xPos = (data.x+180)*0.01745329252;
       previousX = data.x;
     }
     if(data.y > previousY + 5 || data.y < previousY - 5){
-      yPos = (Math.abs(data.y))*0.01745329252;
+      //Omzetten dan radialen (0-90)
+      yPos = (Math.abs(data.y))*0.06981317008;
       previousY = data.y;
-      console.log(`y: ${data.y}`);
-      //console.log(`yPos: ${yPos}`);
     }
   });
 }
