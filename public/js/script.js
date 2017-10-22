@@ -3,6 +3,9 @@ let socket;
 let xPos = 0;
 let yPos = 0;
 
+let previousX = 0;
+let previousY = 0;
+
 const init = () => {
   //THREE JS
   createScene();
@@ -21,18 +24,17 @@ const init = () => {
       explainer.style.display = "none";
     }
 
-    xPos = (data.x/50);
-    yPos = (data.y/50);
-
-    console.log(data.y);
-
-    /*let fixValue;
-    if(data.y>290){
-      fixValue = data.y - 290;
-    }else{
-      fixValue = data.y + 70;
+    if(data.x > previousX + 2 || data.x < previousX - 2){
+      //Omzetten dan radialen
+      xPos = (data.x+180)*0.01745329252;
+      previousX = data.x;
     }
-    yPos = normalizeData(fixValue, 140, 0);*/
+    if(data.y > previousY + 5 || data.y < previousY - 5){
+      yPos = (Math.abs(data.y))*0.01745329252;
+      previousY = data.y;
+      console.log(`y: ${data.y}`);
+      //console.log(`yPos: ${yPos}`);
+    }
   });
 }
 
