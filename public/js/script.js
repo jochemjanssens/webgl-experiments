@@ -8,6 +8,8 @@ let socket;
 
 let xPos = 0;
 let yPos = 0;
+let zPos = 200;
+let xSpeed = 0;
 
 let previousX = 0;
 let previousY = 0;
@@ -19,7 +21,15 @@ const init = () => {
   createCircle();
   loop();
 
-  // socket
+  //leapmotion support
+  //leap();
+
+  //Socket
+  socketStart();
+
+}
+
+const socketStart = () => {
   socket = io.connect('/');
   socket.on('connect', () => {
     createQRcode(socket.id);
@@ -43,6 +53,44 @@ const init = () => {
   });
 }
 
+const leap = () => {
+  const explainer = document.querySelector('.explainer')
+  if(explainer.style.display !== "none"){
+    explainer.style.display = "none";
+  }
+
+  Leap.loop(function(frame) {
+    /*if(frame.hands[0]){
+        var hand = frame.hands;
+        const x = hand[0].palmPosition[0];
+        const y = hand[0].palmPosition[1];
+        const z = hand[0].palmPosition[2];
+        console.log("-----");
+        console.log(x);
+        console.log(y);
+        console.log(z);
+        xPos = (y/10);
+        yPos = (x/10);
+        zPos = (z*10);
+    }*/
+
+    //Speed two hands
+    if(frame.hands[0] && frame.hands[1]){
+        var hand = frame.hands;
+        const x1 = hand[0].palmPosition[0];
+        const x2 = hand[1].palmPosition[0];
+        //console.log("--");
+        //console.log(x2);
+        //console.log(x1);
+
+        xSpeed = (x2-x1)/1000;
+        if(xSpeed < .05){
+          xSpeed = 0;
+        }
+    }
+  });
+}
+
 const createQRcode = id =>{
   var typeNumber = 6;
   var errorCorrectionLevel = 'L';
@@ -60,8 +108,10 @@ const createQRcode = id =>{
 
 const loop = () => {
   renderer.render(scene, camera);
-  circle.mesh.rotation.x = xPos;
+  circle.mesh.rotation.x += xSpeed;
   circle.mesh.rotation.y = yPos;
+
+  camera.position.set(0, 100, zPos);
 
   requestAnimationFrame(loop);
 }

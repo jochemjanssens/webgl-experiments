@@ -16,3 +16,6 @@ Er zitten nog geen linters in dit project omdat dit begonnen is vanuit een klein
 
 ## Commits
 De laatste commits zijn allemaal voorzien van een emoji, de betekennisen hiervan zijn te bekijken op https://gitmoji.carloscuesta.me/.
+
+## Leap motion
+Er is support voor de Leap Motion, dit moet handmatig worden aangezet in de script.js als je beschikt over een Leap Motion.
