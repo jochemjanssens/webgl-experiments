@@ -1,3 +1,9 @@
+//THUIS:
+//let ip = '192.168.0.233';
+
+//KOT:
+let ip = '192.168.1.42';
+
 let socket;
 
 let xPos = 0;
@@ -20,7 +26,7 @@ const init = () => {
   });
   socket.on('update', data => {
     const explainer = document.querySelector('.explainer')
-    if(explainer.style.display != "none"){
+    if(explainer.style.display !== "none"){
       explainer.style.display = "none";
     }
 
@@ -43,13 +49,13 @@ const createQRcode = id =>{
   var qr = qrcode(typeNumber, errorCorrectionLevel);
 
   //LOCAL
-  //qr.addData(`http://192.168.0.233:8080/controller.html?id=${id}`);
+  qr.addData(`http://${ip}:8080/controller.html?id=${id}`);
 
   //ONLINE
-  qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
+  //qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
 
   qr.make();
-  document.getElementById('qrcode').innerHTML = qr.createImgTag();
+  document.querySelector('.qrcode').innerHTML = qr.createImgTag();
 }
 
 const loop = () => {

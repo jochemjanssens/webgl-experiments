@@ -63,11 +63,11 @@ body {
 	color: white;
 }
 
-#qrcode {
+.qrcode {
 	margin: 1rem;
 }
 
-#qrcode img{
+.qrcode img{
 	width: 12rem;
 	height: 12rem;
 }
