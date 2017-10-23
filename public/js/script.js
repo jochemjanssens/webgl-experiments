@@ -97,10 +97,10 @@ const createQRcode = id =>{
   var qr = qrcode(typeNumber, errorCorrectionLevel);
 
   //LOCAL
-  qr.addData(`http://${ip}:8080/controller.html?id=${id}`);
+  //qr.addData(`http://${ip}:8080/controller.html?id=${id}`);
 
   //ONLINE
-  //qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
+  qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
 
   qr.make();
   document.querySelector('.qrcode').innerHTML = qr.createImgTag();
