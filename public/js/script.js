@@ -21,7 +21,7 @@ const init = () => {
   createCircle();
   loop();
 
-  //leapmotion support
+  //leapmotion support (zet ook in de loop de leap functies aan)
   //leap();
 
   //Socket
@@ -108,10 +108,13 @@ const createQRcode = id =>{
 
 const loop = () => {
   renderer.render(scene, camera);
+
+  //SOCKET
   circle.mesh.rotation.x = xPos;
   circle.mesh.rotation.y = yPos;
 
   //LEAP MOTION
+  //circle.mesh.rotation.x = xSpeed;
   //camera.position.set(0, 100, zPos);
 
   requestAnimationFrame(loop);
