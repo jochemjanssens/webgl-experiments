@@ -108,10 +108,11 @@ const createQRcode = id =>{
 
 const loop = () => {
   renderer.render(scene, camera);
-  circle.mesh.rotation.x += xSpeed;
+  circle.mesh.rotation.x = xPos;
   circle.mesh.rotation.y = yPos;
 
-  camera.position.set(0, 100, zPos);
+  //LEAP MOTION
+  //camera.position.set(0, 100, zPos);
 
   requestAnimationFrame(loop);
 }
