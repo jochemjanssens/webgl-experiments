@@ -2,7 +2,7 @@
 //let ip = '192.168.0.233';
 
 //KOT:
-let ip = '192.168.1.42';
+let ip = '192.168.1.18';
 
 let socket;
 
@@ -14,19 +14,20 @@ let xSpeed = 0;
 let previousX = 0;
 let previousY = 0;
 
+//Set true for leapmotion support
+const leapmotion = false;
+
 const init = () => {
-  //THREE JS
   createScene();
   createLights();
   createCircle();
   loop();
 
-  //leapmotion support (zet ook in de loop de leap functies aan)
-  //leap();
-
-  //Socket
-  socketStart();
-
+  if(leapmotion === true){
+    leap();
+  }else{
+    socketStart();
+  }
 }
 
 const socketStart = () => {
@@ -97,10 +98,10 @@ const createQRcode = id =>{
   var qr = qrcode(typeNumber, errorCorrectionLevel);
 
   //LOCAL
-  //qr.addData(`http://${ip}:8080/controller.html?id=${id}`);
+  qr.addData(`http://${ip}:8080/controller.html?id=${id}`);
 
   //ONLINE
-  qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
+  //qr.addData(`https://webgl-experiment.herokuapp.com/controller.html?id=${id}`);
 
   qr.make();
   document.querySelector('.qrcode').innerHTML = qr.createImgTag();
@@ -109,13 +110,13 @@ const createQRcode = id =>{
 const loop = () => {
   renderer.render(scene, camera);
 
-  //SOCKET
-  circle.mesh.rotation.x = xPos;
-  circle.mesh.rotation.y = yPos;
-
-  //LEAP MOTION
-  //circle.mesh.rotation.x = xSpeed;
-  //camera.position.set(0, 100, zPos);
+  if(leapmotion === true){
+    circle.mesh.rotation.x += xSpeed;
+    camera.position.set(0, 100, zPos);
+  }else{
+    circle.mesh.rotation.x = xPos;
+    circle.mesh.rotation.y = yPos;
+  }
 
   requestAnimationFrame(loop);
 }

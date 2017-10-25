@@ -23,8 +23,6 @@
       }
       socket = io.connect('/');
 
-      let previousX = 0;
-      let previousY = 0;
       window.addEventListener('deviceorientation', e => {
         socket.emit('update', targetId, {
           x: e.beta,
