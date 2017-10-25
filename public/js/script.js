@@ -14,6 +14,9 @@ let xSpeed = 0;
 let previousX = 0;
 let previousY = 0;
 
+let previousXPos = 0;
+let previousYPos = 0;
+
 //Set true for leapmotion support
 const leapmotion = false;
 
@@ -114,8 +117,41 @@ const loop = () => {
     circle.mesh.rotation.x += xSpeed;
     camera.position.set(0, 100, zPos);
   }else{
-    circle.mesh.rotation.x = xPos;
-    circle.mesh.rotation.y = yPos;
+    if(previousXPos>xPos){
+      if((previousXPos-xPos) > 1){
+        circle.mesh.rotation.x = previousXPos;
+      }else{
+        console.log("A: " + (previousXPos-xPos));
+        circle.mesh.rotation.x = xPos + ((previousXPos-xPos) / 2);
+        previousXPos = xPos;
+      }
+    }else{
+      if((xPos-previousXPos) > 4){
+        circle.mesh.rotation.x = previousXPos;
+      }else{
+        console.log("B: " + (xPos-previousXPos));
+        circle.mesh.rotation.x = xPos - ((xPos-previousXPos) / 2);
+        previousXPos = xPos;
+      }
+    }
+    if(previousYPos>yPos){
+      if((previousYPos-yPos) > 1.5){
+        circle.mesh.rotation.y = previousYPos;
+      }else{
+        console.log("C: " + (previousYPos-yPos));
+        circle.mesh.rotation.y = yPos + ((previousYPos-yPos) / 3);
+        previousYPos = yPos;
+      }
+    }else{
+      if((yPos-previousYPos) > 1){
+        console.log("D limiter");
+        circle.mesh.rotation.y = previousYPos;
+      }else{
+        console.log("D: " + (yPos-previousYPos));
+        circle.mesh.rotation.y = yPos - ((yPos-previousYPos) / 2);
+        previousYPos = yPos;
+      }
+    }
   }
 
   requestAnimationFrame(loop);
