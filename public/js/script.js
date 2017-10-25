@@ -17,6 +17,8 @@ let previousY = 0;
 let previousXPos = 0;
 let previousYPos = 0;
 
+let screenup = true;
+
 //Set true for leapmotion support
 const leapmotion = false;
 
@@ -51,7 +53,15 @@ const socketStart = () => {
     }
     if(data.y > previousY + 5 || data.y < previousY - 5){
       //Omzetten dan radialen (0-90)
-      yPos = (Math.abs(data.y))*0.06981317008;
+      if(data.y - previousY > 100 || previousY - data.y > 100){
+        screenup = !screenup;
+      }
+      if(screenup){
+        yPos = data.y*0.06981317008;
+      }else{
+        yPos = data.y*-0.06981317008;
+      }
+
       previousY = data.y;
     }
   });
@@ -121,7 +131,6 @@ const loop = () => {
       if((previousXPos-xPos) > 1){
         circle.mesh.rotation.x = previousXPos;
       }else{
-        console.log("A: " + (previousXPos-xPos));
         circle.mesh.rotation.x = xPos + ((previousXPos-xPos) / 2);
         previousXPos = xPos;
       }
@@ -129,7 +138,6 @@ const loop = () => {
       if((xPos-previousXPos) > 4){
         circle.mesh.rotation.x = previousXPos;
       }else{
-        console.log("B: " + (xPos-previousXPos));
         circle.mesh.rotation.x = xPos - ((xPos-previousXPos) / 2);
         previousXPos = xPos;
       }
@@ -138,16 +146,13 @@ const loop = () => {
       if((previousYPos-yPos) > 1.5){
         circle.mesh.rotation.y = previousYPos;
       }else{
-        console.log("C: " + (previousYPos-yPos));
         circle.mesh.rotation.y = yPos + ((previousYPos-yPos) / 3);
         previousYPos = yPos;
       }
     }else{
       if((yPos-previousYPos) > 1){
-        console.log("D limiter");
         circle.mesh.rotation.y = previousYPos;
       }else{
-        console.log("D: " + (yPos-previousYPos));
         circle.mesh.rotation.y = yPos - ((yPos-previousYPos) / 2);
         previousYPos = yPos;
       }
